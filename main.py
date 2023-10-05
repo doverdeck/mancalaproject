@@ -13,17 +13,25 @@ def button_click(b,c):
 
 # Create a 2x7 grid of buttons
 buttons = [[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 6, 7]]
-grid = [[0, 4, 4, 4, 4, 4, 4],[0, 4, 4, 4, 4, 4, 4]]
+grid = [[0, 4, 4, 4, 4, 4, 4],[4, 4, 4, 4, 4, 4, 0]]
 for i in range(2):
     b=0
     for j in range(7):
-        if (i!=0):
-            button = tk.Button(root, width=10, height=3,text=f"Blank", command=lambda b=b,c=c: button_click(b,c))
+        if ((i==0 and j==0)or(i==1 and j==6)):
+            button = tk.Button(root, width=10, height=12,text=f"Blank", command=lambda b=b,c=c: button_click(b,c))
         else:
-            button = tk.Button(root, width=10, height=6, text=f"Blank", command=lambda b=b, c=c: button_click(b, c))
+            button = tk.Button(root, width=10, height=3, text=f"Blank", command=lambda b=b, c=c: button_click(b, c))
         b=b+1
         print(f"{b}")
         button.grid(row=i, column=j)
+        if (i==0):
+            button.place(x=j*80,y=20)
+        if (i==1):
+            button.place(x=80+j*80,y=100)
+        if(i==0 and j==0):
+            button.place(x=0, y=0)
+        if (i == 1 and j == 6):
+            button.place(x=80 + j * 80, y=0)
         buttons[i][j] = button
     c = c + 1
 # Start the tkinter main loop
