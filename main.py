@@ -85,7 +85,7 @@ for i in range(2):
     b=0
     for j in range(7):
         if ((i==0 and j==0)or(i==1 and j==6)):
-            button = tk.Button(root, width=10, height=12,text=f"{grid[c][b]}")
+            button = tk.Button(root, fg = 'brown' , width=10, height=12, text=f"{grid[c][b]}")
         else:
             button = tk.Button(root, width=10, height=4, text=f"{grid[c][b]}", command=lambda b=b, c=c: button_click(b, c))
         b=b+1
