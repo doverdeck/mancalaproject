@@ -13,26 +13,30 @@ def button_click(b,c):
     print(f"{b}")
     row=c
     col=b
-    for i in range(grid[c][b]):
-        grid[c][b]=grid[c][b]-1
-        if(row==1):
-            if(col+1>6):
-                col=6
-                row=0
-                grid[0][6]=grid[0][6]+1
-            else:
-                grid[row][col+1]=grid[row][col+1]+1
-                col=col+1
+    if ((row==1 and counter==1) or (row==0 and counter==0)):
+        for i in range(grid[c][b]):
+            grid[c][b]=grid[c][b]-1
+            if(row==1):
+                if(col+1>6):
+                    col=6
+                    row=0
+                    grid[0][6]=grid[0][6]+1
+                else:
+                    grid[row][col+1]=grid[row][col+1]+1
+                    col=col+1
+            elif(row==0):
+                if (col-1<0):
+                    col = 0
+                    row = 1
+                    grid[1][0]=grid[1][0]+1
+                else:
+                    grid[row][col-1] = grid[row][col - 1]+1
+                    col = col-1
+        if (counter==0 and (col!=0 or row!=0)):
             counter=1
-        elif(row==0):
-            if (col-1<0):
-                col = 0
-                row = 1
-                grid[1][0]=grid[1][0]+1
-            else:
-                grid[row][col-1] = grid[row][col - 1]+1
-                col = col-1
+        elif(counter==1 and (col!=6 or row!=1)):
             counter=0
+
     print(f"grid={grid[c][b]}")
     check_winner()
     update_text()
