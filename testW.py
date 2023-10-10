@@ -6,25 +6,12 @@
 # player 1 mancala has c-value of 0
 # player 2 mancala has c-value of 1
 
-import tkinter as tk
-import random
+#parameters are values updated each time the code is ran
+#call the steal method within the button click
+def steal_tokens( ):
+    #I need the x and y cords of the button clicked, and the value
+    #if the value of the last pit filled = 1 cus it was 0 before it got the last token
+    #then button x,y = 0  and button x, math.abs(y-1) = 0  and mancala value adds the values of both buttons
 
 
-def change_button_color():
-    # Generate a random color (you can set your own color logic here)
-    random_color = "#{:02x}{:02x}{:02x}".format(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
-    # Configure the button's background color
-    red_button.config(bg=random_color)
-
-
-# Create a tkinter window
-window = tk.Tk()
-window.title("Change Button Color Example")
-
-# Create an initial red-colored button
-red_button = tk.Button(window, text="Change Color", bg="red", fg="red", command=change_button_color)
-red_button.pack()
-
-# Start the Tkinter main loop
-window.mainloop()

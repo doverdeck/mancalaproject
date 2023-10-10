@@ -1,11 +1,12 @@
 import tkinter as tk
 from tkinter import *
+
 # Create the main window
 root = tk.Tk()
 root.title("Mancala")
 counter=0
-b=0
-c=0
+b=0 #b is the y-cord
+c=0 #c is the x-cord
 # Create a function to handle button clicks
 def button_click(b,c):
     global counter
@@ -81,6 +82,7 @@ def show_winner():
 # Create a 2x7 grid of buttons
 buttons = [[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 6, 7]]
 grid = [[0, 4, 4, 4, 4, 4, 4],[4, 4, 4, 4, 4, 4, 0]]
+
 for i in range(2):
     b=0
     for j in range(7):
