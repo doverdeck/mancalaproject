@@ -2,34 +2,37 @@ import tkinter as tk
 from tkinter import *
 # Create the main window
 root = tk.Tk()
-root.title("Tic tac toe")
+root.title("Mancala")
 counter=0
 b=0
 c=0
 # Create a function to handle button clicks
 def button_click(b,c):
+    global counter
     print(f"{c}")
     print(f"{b}")
     row=c
     col=b
     for i in range(grid[c][b]):
         grid[c][b]=grid[c][b]-1
-        if(row==0):
+        if(row==1):
             if(col+1>6):
                 col=6
-                row=1
-                grid[1][6]=grid[1][6]+1
+                row=0
+                grid[0][6]=grid[0][6]+1
             else:
                 grid[row][col+1]=grid[row][col+1]+1
                 col=col+1
-        elif(row==1):
+            counter=1
+        elif(row==0):
             if (col-1<0):
                 col = 0
-                row = 0
-                grid[0][0]=grid[0][0]+1
+                row = 1
+                grid[1][0]=grid[1][0]+1
             else:
                 grid[row][col-1] = grid[row][col - 1]+1
                 col = col-1
+            counter=0
     print(f"grid={grid[c][b]}")
     check_winner()
     update_text()
@@ -48,10 +51,29 @@ def check_winner():
         grid[1][6]=sum2+grid[1][6]
         for j in range(6):
             grid[1][j]=0
+        show_winner()
     elif(sum2==0):
         grid[0][0] = sum + grid[0][0]
         for i in range(6):
             grid[0][i + 1]=0
+        show_winner()
+def show_winner():
+    if (grid[0][0] > grid[1][6]):
+        main = tk.Tk()
+        main.title("Player 1 Wins!")
+        text = Label(main, text="PLAYER 1 WINS")
+        text.grid(row=0, padx=10, pady=10)
+    elif (grid[0][0] < grid[1][6]):
+        main = tk.Tk()
+        main.title("Player 2 Wins!")
+        text = Label(main, text="PLAYER 2 WINS")
+        text.grid(row=0, padx=10, pady=10)
+    else:
+        main = tk.Tk()
+        main.title("Tie")
+        text = Label(main, text="TIE")
+        text.grid(row=0, padx=10, pady=10)
+
 # Create a 2x7 grid of buttons
 buttons = [[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 6, 7]]
 grid = [[0, 4, 4, 4, 4, 4, 4],[4, 4, 4, 4, 4, 4, 0]]
