@@ -79,6 +79,19 @@ def show_winner(): # method to show the winner
         main.title("Tie")
         text = Label(main, text="TIE")
         text.grid(row=0, padx=10, pady=10)
+def check_steal():
+    p1_final_index = c - grid[c,b]
+    p2_final_index = c + grid[c,b]
+    #if p2_final_index> 5:
+    if counter == 0:
+        print(grid[p1_final_index,counter])
+        if grid[p1_final_index,counter] == 0:
+            grid[p1_final_index,counter] = grid[p2_final_index,1]
+            grid[p2_final_index,1] = 0
+    else:
+        if grid[p2_final_index, counter] == 0:
+            grid[p2_final_index, counter] = grid[p1_final_index,1]
+            grid[p1_final_index,1] = 0
 
 # Create a 2x7 grid of buttons
 buttons = [[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 6, 7]]
