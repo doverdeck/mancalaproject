@@ -10,7 +10,7 @@ def start(): #starts the main method
     restart() #restarts the game buy running method
     root.mainloop() #starts the code
 def restart():
-    from main import restart #restarts game by running method in main called restart
+    from main import restart # restarts game by running method in main called restart
     restart()
 def tutorial(): #will create a tutorial image (not finished)
     import testW

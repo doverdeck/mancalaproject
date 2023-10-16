@@ -148,7 +148,7 @@ buttons = [[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 6, 7]]
 #creates a 2x7 array of the buttons bead values
 grid = [[0, 4, 4, 4, 4, 4, 4],[4, 4, 4, 4, 4, 4, 0]]
 def restart(): #this method restarts the game
-    #resets the grids to their assigned values at start by using a for loop that traverses each element
+    #resets the grids to their assigned values at start by using a for loop that traverses each elements
     for i in range(2):
         for j in range(7):
             grid[i][j]=4
