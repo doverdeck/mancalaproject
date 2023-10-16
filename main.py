@@ -83,19 +83,23 @@ def show_winner(): # method to show the winner
         text.grid(row=0, padx=10, pady=10)
 
 def check_steal():
-    p1_final_index = c - grid[b][c]
-    p2_final_index = c + grid[b][c]
+    p1_final_index = c - grid[0][c] # 0,5 then 5 - #This isnt working
+    p2_final_index = c + grid[1][c]
     if p1_final_index < 0 or p2_final_index > 6:
         return
-    if counter == 0:
+    if counter == 0: # if it's player 1 turn
         print(grid[counter][p1_final_index])
-        if grid[counter][p1_final_index] == 0:
-            grid[counter][p1_final_index] = grid[1][p2_final_index]
-            grid[1][p2_final_index] = 0
-        else:
-            if grid[counter][p2_final_index] == 0:
-                grid[counter][p2_final_index] = grid[1][p1_final_index]
-                grid[1][p1_final_index] = 0
+        if grid[counter][p1_final_index] == 0: # if the last pit is 0
+            grid[0][0] = grid[0][0] + grid[counter][p1_final_index] # player 1 mancala adds the token that stole(1)
+            grid[0][0] = grid[0][0] + grid[1][p1_final_index] # player 1 manacala adds the stolen tokens
+            grid[counter][p1_final_index] = 0 # reset player 1 button to 0
+            grid[1][p1_final_index] = 0 # reset player 2 button to 0
+    else: # if it's player 2 turn
+        if grid[counter][p2_final_index] == 0:
+            grid[1][6] = grid[1][6] + grid[counter][p2_final_index]  # player 2 mancala adds the token that stole(1)
+            grid[1][6] = grid[1][6] + grid[0][p2_final_index]  # player 2 manacala adds the stolen tokens
+            grid[counter][p2_final_index] = 0  # reset player 2 button to 0
+            grid[0][p2_final_index] = 0  # reset player 1 button to 0
 
 # Create a 2x7 grid of buttons
 buttons = [[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 6, 7]]
