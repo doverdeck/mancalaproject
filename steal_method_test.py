@@ -8,8 +8,8 @@
 
 #parameters are values updated each time the code is ran
 #call the steal method within the button click
-def steal_tokens( ):
-        #I need the x and y cords of the button clicked, and the value
+#def steal_tokens( ):
+    #I need the x and y cords of the button clicked, and the value
     #if the value of the last pit filled = 1 cus it was 0 before it got the last token
     #then button x,y = 0  and button x, math.abs(y-1) = 0  and mancala value adds the values of both buttons
 

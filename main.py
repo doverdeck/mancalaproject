@@ -41,7 +41,9 @@ def button_click(b,c): # whenever a button is pressed
 
     print(f"grid={grid[c][b]}")
     check_winner()
+    check_steal()
     update_text()
+
 def update_text():
     for i in range(2):
         for j in range(7):
@@ -79,6 +81,21 @@ def show_winner(): # method to show the winner
         main.title("Tie")
         text = Label(main, text="TIE")
         text.grid(row=0, padx=10, pady=10)
+
+def check_steal():
+    p1_final_index = c - grid[b][c]
+    p2_final_index = c + grid[b][c]
+    if p1_final_index < 0 or p2_final_index > 6:
+        return
+    if counter == 0:
+        print(grid[counter][p1_final_index])
+        if grid[counter][p1_final_index] == 0:
+            grid[counter][p1_final_index] = grid[1][p2_final_index]
+            grid[1][p2_final_index] = 0
+        else:
+            if grid[counter][p2_final_index] == 0:
+                grid[counter][p2_final_index] = grid[1][p1_final_index]
+                grid[1][p1_final_index] = 0
 
 # Create a 2x7 grid of buttons
 buttons = [[1, 2, 3, 4, 5, 6, 7],[1, 2, 3, 4, 5, 6, 7]]
