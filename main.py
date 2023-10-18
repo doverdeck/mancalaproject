@@ -2,9 +2,10 @@ import tkinter as tk
 from tkinter import *
 # Create the main window
 root=tk.Tk()
+root.configure(bg="orange")
 main = tk.Tk()
 main.withdraw()
-root.geometry("640x200") #sets geometry of mancala board
+root.geometry("660x200") #sets geometry of mancala board
 main.geometry("80x150") #sets geometry of text box at end of game
 root.title("Mancala") #sets title for mancala board
 #counter is used to determine player turns counter==0 means player 1 counter==1 means player 2
@@ -171,10 +172,10 @@ for i in range(2):
         #if it is a bank it has seperate rules
         if ((i==0 and j==0)or(i==1 and j==6)):
             #creates button that is larger than other buttons
-            button = tk.Button(root, width=10, height=12,text=f"{grid[c][b]}")
+            button = tk.Button(root, width=10, height=12,text=f"{grid[c][b]}", bg="blue", fg="orange",font=("Helvetica",10))
         else:
             #otherwise if it is a normal button or a pit makes it smaller and gives it a command
-            button = tk.Button(root, width=10, height=4, text=f"{grid[c][b]}", command=lambda b=b, c=c: button_click(b, c))
+            button = tk.Button(root, width=10, height=4, text=f"{grid[c][b]}", command=lambda b=b, c=c: button_click(b, c), bg="blue", fg="orange",font=("Helvetica", 9))
         #iterates the col
         b=b+1
         print(f"{b}")
@@ -182,16 +183,16 @@ for i in range(2):
         button.grid(row=i, column=j)
         if (i==0):
             #places the button if row is 0 given settings
-            button.place(x=j*80,y=20)
+            button.place(x=10+j*80,y=20)
         if (i==1):
             # places the button if row is 1 given settings
-            button.place(x=80+j*80,y=100)
+            button.place(x=90+j*80,y=100)
         if(i==0 and j==0):
             # places the button if row is 0 and is bank given settings
             button.place(x=0, y=0)
         if (i == 1 and j == 6):
             # places the button if row is 1 and is bank given settings
-            button.place(x=80 + j * 80, y=0)
+            button.place(x=90 + j * 80, y=0)
         buttons[i][j] = button
     #iterates the row
     c = c + 1
