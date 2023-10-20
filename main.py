@@ -17,7 +17,7 @@ c=0
 # Create a function to handle button clicks
 def button_click(b,c):
     global counter
-    #checks if row and col are correct for param
+    #checks if row and col are correct for params
     print(f"{c}")
     print(f"{b}")
     #sets parameters as given varaibles
