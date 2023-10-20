@@ -5,7 +5,7 @@ root=tk.Tk()
 root.configure(bg="orange")
 main = tk.Tk()
 main.withdraw()
-root.geometry("660x200") #sets geometry of mancala board
+root.geometry("1200x600") #sets geometry of mancala board
 main.geometry("80x150") #sets geometry of text box at end of game
 root.title("Mancala") #sets title for mancala board
 #counter is used to determine player turns counter==0 means player 1 counter==1 means player 2
@@ -24,7 +24,7 @@ def button_click(b,c):
     row=c
     col=b
     #if row 1 has been and it is player 2s turn or if row 0 has been selected and it is player 1s turn it runs
-    if ((row==1 and counter==1) or (row==0 and counter==0)):
+    if ((row==1 and counter==1) or (row==0 and counter==0)) and (grid[row][col]!=0):
         for i in range(grid[c][b]): #runs a for loop that traverses the amount of elements for each bead in the selected array, adds 1 to each element until out of beads
             grid[c][b]=grid[c][b]-1
             if(row==1): #If row is 1 then it adds 1 to the elements, with increasing cols
@@ -53,6 +53,7 @@ def button_click(b,c):
             counter=0
 
     print(f"grid={grid[c][b]}")
+    check_steal(row, col)
     #runs def that checks the winner
     check_winner()
     #then it updates the text of the code
@@ -62,6 +63,26 @@ def update_text():
     for i in range(2):
         for j in range(7):
             buttons[i][j].config(text=f"{grid[i][j]}")
+def check_steal(row, col):
+    print(f"its running {row} {col}")
+    if ((row==1) and (counter==1)) or ((row==0) and (counter==0)):
+        return
+    if (row==1 and col==6)or(row==0 and col==0):
+        return
+    if counter == 1 : # if it's player 1 turn
+        if grid[row][col] == 1 and grid[1][col-1]>0: # if the last pit is 0
+            print(f"steal {row} {col}")
+            grid[0][0] = grid[0][0] + grid[row][col] # player 1 mancala adds the token that stole(1)
+            grid[0][0] = grid[0][0] + grid[1][col-1] # player 1 mancala adds the stolen tokens
+            grid[row][col] = 0 # reset player 1 button to 0
+            grid[1][col-1] = 0 # reset player 2 button to 0
+    else: # if it's player 2 turn
+        if grid[row][col] == 1 and grid[0][col+1]>0:
+            print(f"steal {row} {col}")
+            grid[1][6] = grid[1][6] + grid[row][col]  # player 2 mancala adds the token that stole(1)
+            grid[1][6] = grid[1][6] + grid[0][col+1]  # player 2 mancala adds the stolen tokens
+            grid[row][col] = 0  # reset player 2 button to 0
+            grid[0][col+1] = 0  # reset player 1 button to 0
 def check_winner():
     #makes a for loop that sums all the reamining beads up
     sum=0
@@ -172,10 +193,10 @@ for i in range(2):
         #if it is a bank it has seperate rules
         if ((i==0 and j==0)or(i==1 and j==6)):
             #creates button that is larger than other buttons
-            button = tk.Button(root, width=10, height=12,text=f"{grid[c][b]}", bg="blue", fg="orange",font=("Helvetica",10))
+            button = tk.Button(root, width=12, height=24,text=f"{grid[c][b]}", bg="blue", fg="orange",font=("Helvetica",15,"bold"))
         else:
             #otherwise if it is a normal button or a pit makes it smaller and gives it a command
-            button = tk.Button(root, width=10, height=4, text=f"{grid[c][b]}", command=lambda b=b, c=c: button_click(b, c), bg="blue", fg="orange",font=("Helvetica", 9))
+            button = tk.Button(root, width=12, height=13, text=f"{grid[c][b]}", command=lambda b=b, c=c: button_click(b, c),bg="blue", fg="orange", font=("Helvetica",13,"bold"))
         #iterates the col
         b=b+1
         print(f"{b}")
@@ -183,16 +204,16 @@ for i in range(2):
         button.grid(row=i, column=j)
         if (i==0):
             #places the button if row is 0 given settings
-            button.place(x=10+j*80,y=20)
+            button.place(x=75+j*132,y=20)
         if (i==1):
             # places the button if row is 1 given settings
-            button.place(x=90+j*80,y=100)
+            button.place(x=207+j*132,y=300)
         if(i==0 and j==0):
             # places the button if row is 0 and is bank given settings
-            button.place(x=0, y=0)
+            button.place(x=50, y=0)
         if (i == 1 and j == 6):
             # places the button if row is 1 and is bank given settings
-            button.place(x=90 + j * 80, y=0)
+            button.place(x=220 + j * 130, y=0)
         buttons[i][j] = button
     #iterates the row
     c = c + 1
