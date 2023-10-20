@@ -56,6 +56,7 @@ def button_click(b,c):
     check_steal(row, col)
     #runs def that checks the winner
     check_winner()
+    check_steal()
     #then it updates the text of the code
     update_text()
 def update_text():
@@ -183,6 +184,25 @@ def restart(): #this method restarts the game
     update_text()
     #makes the board reappear
     root.deiconify()
+
+def check_steal():
+    p1_final_index = c - grid[0][c] # 0,5 then 5 - #This isnt working
+    p2_final_index = c + grid[1][c]
+    if p1_final_index < 0 or p2_final_index > 6:
+        return
+    if counter == 0: # if it's player 1 turn
+        print(grid[counter][p1_final_index])
+        if grid[counter][p1_final_index] == 0: # if the last pit is 0
+            grid[0][0] = grid[0][0] + grid[counter][p1_final_index] # player 1 mancala adds the token that stole(1)
+            grid[0][0] = grid[0][0] + grid[1][p1_final_index] # player 1 manacala adds the stolen tokens
+            grid[counter][p1_final_index] = 0 # reset player 1 button to 0
+            grid[1][p1_final_index] = 0 # reset player 2 button to 0
+    else: # if it's player 2 turn
+        if grid[counter][p2_final_index] == 0:
+            grid[1][6] = grid[1][6] + grid[counter][p2_final_index]  # player 2 mancala adds the token that stole(1)
+            grid[1][6] = grid[1][6] + grid[0][p2_final_index]  # player 2 manacala adds the stolen tokens
+            grid[counter][p2_final_index] = 0  # reset player 2 button to 0
+            grid[0][p2_final_index] = 0  # reset player 1 button to 0
 
 
 #runs a for loop that creates the 2x7 array of buttons and board
